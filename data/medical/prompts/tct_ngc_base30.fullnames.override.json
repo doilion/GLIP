@@ -1,0 +1,152 @@
+[
+  {
+    "id": 0,
+    "name": "Respiratory tract cytology - Neutrophil",
+    "supercategory": "respiratory tract"
+  },
+  {
+    "id": 1,
+    "name": "Respiratory tract cytology - Alveolar macrophage",
+    "supercategory": "respiratory tract"
+  },
+  {
+    "id": 2,
+    "name": "Respiratory tract cytology - Ciliated respiratory epithelial cell",
+    "supercategory": "respiratory tract"
+  },
+  {
+    "id": 3,
+    "name": "Respiratory tract cytology - Lymphocyte",
+    "supercategory": "respiratory tract"
+  },
+  {
+    "id": 4,
+    "name": "Respiratory tract cytology - Contaminant and debris",
+    "supercategory": "respiratory tract"
+  },
+  {
+    "id": 5,
+    "name": "Respiratory tract cytology - Squamous epithelial cell",
+    "supercategory": "respiratory tract"
+  },
+  {
+    "id": 6,
+    "name": "Respiratory tract cytology - Atypical or malignant cells, NOS",
+    "supercategory": "respiratory tract"
+  },
+  {
+    "id": 7,
+    "name": "Serous fluid cytology - Negative for malignancy (NFM)",
+    "supercategory": "Serous effusion"
+  },
+  {
+    "id": 8,
+    "name": "Serous fluid cytology - Atypical, suspicious, or malignant cells, NOS",
+    "supercategory": "Serous effusion"
+  },
+  {
+    "id": 9,
+    "name": "Thyroid cytopathology - Papillary thyroid carcinoma (Bethesda VI: Malignant)",
+    "supercategory": "Thyroid gland"
+  },
+  {
+    "id": 10,
+    "name": "Thyroid cytopathology - Suspicious for papillary thyroid carcinoma (Bethesda V: Suspicious for malignancy)",
+    "supercategory": "Thyroid gland"
+  },
+  {
+    "id": 11,
+    "name": "Thyroid cytopathology - Nondiagnostic or unsatisfactory specimen (Bethesda I)",
+    "supercategory": "Thyroid gland"
+  },
+  {
+    "id": 12,
+    "name": "Thyroid cytopathology - Macrophage",
+    "supercategory": "Thyroid gland"
+  },
+  {
+    "id": 13,
+    "name": "Thyroid cytopathology - Atypia of undetermined significance (AUS; Bethesda III)",
+    "supercategory": "Thyroid gland"
+  },
+  {
+    "id": 14,
+    "name": "Thyroid cytopathology - Benign (Bethesda II)",
+    "supercategory": "Thyroid gland"
+  },
+  {
+    "id": 15,
+    "name": "Thyroid cytopathology - Follicular epithelial cell",
+    "supercategory": "Thyroid gland"
+  },
+  {
+    "id": 16,
+    "name": "Urinary cytology - Negative for high-grade urothelial carcinoma (NHGUC, Paris System)",
+    "supercategory": "Urine"
+  },
+  {
+    "id": 17,
+    "name": "Urinary cytology - Suspicious for high-grade urothelial carcinoma (SHGUC)",
+    "supercategory": "Urine"
+  },
+  {
+    "id": 18,
+    "name": "Urinary cytology - Atypical urothelial cells (AUC)",
+    "supercategory": "Urine"
+  },
+  {
+    "id": 19,
+    "name": "Urinary cytology - High-grade urothelial carcinoma (HGUC)",
+    "supercategory": "Urine"
+  },
+  {
+    "id": 20,
+    "name": "Cervical cytology - Negative for intraepithelial lesion or malignancy (NILM)",
+    "supercategory": "TCT_CCD"
+  },
+  {
+    "id": 21,
+    "name": "Cervical cytology - Atypical squamous cells of undetermined significance (ASC-US)",
+    "supercategory": "TCT_CCD"
+  },
+  {
+    "id": 22,
+    "name": "Cervical cytology - Atypical squamous cells, cannot exclude HSIL (ASC-H)",
+    "supercategory": "TCT_CCD"
+  },
+  {
+    "id": 23,
+    "name": "Cervical cytology - Low-grade squamous intraepithelial lesion (LSIL)",
+    "supercategory": "TCT_CCD"
+  },
+  {
+    "id": 24,
+    "name": "Cervical cytology - High-grade squamous intraepithelial lesion (HSIL), squamous cell carcinoma, or other malignant neoplasm",
+    "supercategory": "TCT_CCD"
+  },
+  {
+    "id": 25,
+    "name": "Cervical cytology - Atypical glandular cells (AGC), adenocarcinoma, or endometrial cells",
+    "supercategory": "TCT_CCD"
+  },
+  {
+    "id": 26,
+    "name": "Cervical cytology - Trichomonas vaginalis",
+    "supercategory": "TCT_CCD"
+  },
+  {
+    "id": 27,
+    "name": "Cervical cytology - Fungal organisms morphologically consistent with Candida spp.",
+    "supercategory": "TCT_CCD"
+  },
+  {
+    "id": 28,
+    "name": "Cervical cytology - Shift in flora suggestive of bacterial vaginosis, cellular changes consistent with herpes simplex virus (HSV), or bacteria morphologically consistent with Actinomyces spp.",
+    "supercategory": "TCT_CCD"
+  },
+  {
+    "id": 29,
+    "name": "Cervical cytology - Endocervical and transformation-zone component",
+    "supercategory": "TCT_CCD"
+  }
+]

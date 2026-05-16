@@ -1,0 +1,159 @@
+{
+  "info": {
+    "description": "Synthetic ann file (categories only) for prompt building"
+  },
+  "images": [],
+  "annotations": [],
+  "categories": [
+    {
+      "id": 0,
+      "name": "respiratory tract-Neutrophil",
+      "supercategory": "respiratory tract"
+    },
+    {
+      "id": 1,
+      "name": "respiratory tract-Alveolar macrophages",
+      "supercategory": "respiratory tract"
+    },
+    {
+      "id": 2,
+      "name": "respiratory tract-Ciliated columnar epithelial cells",
+      "supercategory": "respiratory tract"
+    },
+    {
+      "id": 3,
+      "name": "respiratory tract-Lymphocyte",
+      "supercategory": "respiratory tract"
+    },
+    {
+      "id": 4,
+      "name": "respiratory tract-Impurity",
+      "supercategory": "respiratory tract"
+    },
+    {
+      "id": 5,
+      "name": "respiratory tract-Squamous epithelial cells",
+      "supercategory": "respiratory tract"
+    },
+    {
+      "id": 6,
+      "name": "respiratory tract-Diseased cells",
+      "supercategory": "respiratory tract"
+    },
+    {
+      "id": 7,
+      "name": "Serous effusion-Negative samples",
+      "supercategory": "Serous effusion"
+    },
+    {
+      "id": 8,
+      "name": "Serous effusion-Diseased cells",
+      "supercategory": "Serous effusion"
+    },
+    {
+      "id": 9,
+      "name": "Thyroid gland-PTC",
+      "supercategory": "Thyroid gland"
+    },
+    {
+      "id": 10,
+      "name": "Thyroid gland-SPTC",
+      "supercategory": "Thyroid gland"
+    },
+    {
+      "id": 11,
+      "name": "Thyroid gland-NS",
+      "supercategory": "Thyroid gland"
+    },
+    {
+      "id": 12,
+      "name": "Thyroid gland-Macrophages",
+      "supercategory": "Thyroid gland"
+    },
+    {
+      "id": 13,
+      "name": "Thyroid gland-AUC",
+      "supercategory": "Thyroid gland"
+    },
+    {
+      "id": 14,
+      "name": "Thyroid gland-Negative samples",
+      "supercategory": "Thyroid gland"
+    },
+    {
+      "id": 15,
+      "name": "Thyroid gland-FC",
+      "supercategory": "Thyroid gland"
+    },
+    {
+      "id": 16,
+      "name": "Urine-NHGUC",
+      "supercategory": "Urine"
+    },
+    {
+      "id": 17,
+      "name": "Urine-SHGUC",
+      "supercategory": "Urine"
+    },
+    {
+      "id": 18,
+      "name": "Urine-AUC",
+      "supercategory": "Urine"
+    },
+    {
+      "id": 19,
+      "name": "Urine-HGUC",
+      "supercategory": "Urine"
+    },
+    {
+      "id": 20,
+      "name": "TCT_CCD-normal",
+      "supercategory": "TCT_CCD"
+    },
+    {
+      "id": 21,
+      "name": "TCT_CCD-ascus",
+      "supercategory": "TCT_CCD"
+    },
+    {
+      "id": 22,
+      "name": "TCT_CCD-asch",
+      "supercategory": "TCT_CCD"
+    },
+    {
+      "id": 23,
+      "name": "TCT_CCD-lsil",
+      "supercategory": "TCT_CCD"
+    },
+    {
+      "id": 24,
+      "name": "TCT_CCD-hsil_scc_omn",
+      "supercategory": "TCT_CCD"
+    },
+    {
+      "id": 25,
+      "name": "TCT_CCD-agc_adenocarcinoma_em",
+      "supercategory": "TCT_CCD"
+    },
+    {
+      "id": 26,
+      "name": "TCT_CCD-vaginalis",
+      "supercategory": "TCT_CCD"
+    },
+    {
+      "id": 27,
+      "name": "TCT_CCD-monilia",
+      "supercategory": "TCT_CCD"
+    },
+    {
+      "id": 28,
+      "name": "TCT_CCD-dysbacteriosis_herpes_act",
+      "supercategory": "TCT_CCD"
+    },
+    {
+      "id": 29,
+      "name": "TCT_CCD-ec",
+      "supercategory": "TCT_CCD"
+    }
+  ]
+}
