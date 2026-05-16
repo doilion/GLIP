@@ -1,0 +1,53 @@
+# GLIP eval task config — TCT_NGC base30, PSC diag_raw prompts, chunked.
+#
+# Pair with a base GLIP-T / GLIP-L model config (configs/pretrain/*.yaml) and
+# pass to tools/test_grounding_net.py (or the medical-prior variants
+# test_grounding_net_exclude_negative.py / test_grounding_net_organ_prior.py)
+# via --task_config.
+#
+# Why CHUNKED_EVALUATION 11:
+#   Concatenating all 30 diag_raw PSC prompts produces ~660 BERT tokens, well
+#   above the default MODEL.LANGUAGE_BACKBONE.MAX_QUERY_LEN of 256. Without
+#   chunking, GLIP would silently drop the last ~18 classes after the first
+#   ~12 fit (see tools/check_prompt_token_length.py for the calc). With
+#   chunk=11, the run does 3 forward passes per image, each ≤ 256 tokens, and
+#   every class is scored. Other PSC formats fit differently — see
+#   configs/medical/README.md for the per-format chunk recommendation.
+
+DATASETS:
+  GENERAL_COPY: 16
+  USE_OVERRIDE_CATEGORY: True
+  OVERRIDE_CATEGORY: '[{"id": 0, "name": "respiratory tract cytology - PSC Category II: Negative — acute neutrophilic inflammation", "supercategory": "respiratory tract"}, {"id": 1, "name": "respiratory tract cytology - PSC Category II: Negative — alveolar macrophages", "supercategory": "respiratory tract"}, {"id": 2, "name": "respiratory tract cytology - PSC Category II: Negative — benign bronchial epithelium", "supercategory": "respiratory tract"}, {"id": 3, "name": "respiratory tract cytology - PSC Category II: Negative — benign lymphoid cells", "supercategory": "respiratory tract"}, {"id": 4, "name": "respiratory tract cytology - PSC Category I: Nondiagnostic — contaminant or artifact", "supercategory": "respiratory tract"}, {"id": 5, "name": "respiratory tract cytology - PSC Category II: Negative — benign squamous epithelium", "supercategory": "respiratory tract"}, {"id": 6, "name": "respiratory tract cytology - PSC Category III: Atypical — reactive/indeterminate epithelial atypia", "supercategory": "respiratory tract"}, {"id": 7, "name": "Serous effusion cytology - TIS Category II: NFM — negative for malignancy", "supercategory": "Serous effusion"}, {"id": 8, "name": "Serous effusion cytology - TIS Category III: AUS — atypia of undetermined significance", "supercategory": "Serous effusion"}, {"id": 9, "name": "Thyroid gland cytology - Bethesda VI: Malignant — papillary thyroid carcinoma", "supercategory": "Thyroid gland"}, {"id": 10, "name": "Thyroid gland cytology - Bethesda V: Suspicious for malignancy — suspicious PTC", "supercategory": "Thyroid gland"}, {"id": 11, "name": "Thyroid gland cytology - Bethesda I: Nondiagnostic — scant follicular cells", "supercategory": "Thyroid gland"}, {"id": 12, "name": "Thyroid gland cytology - Bethesda I: Nondiagnostic — cyst fluid only", "supercategory": "Thyroid gland"}, {"id": 13, "name": "Thyroid gland cytology - Bethesda III: AUS — atypia of undetermined significance", "supercategory": "Thyroid gland"}, {"id": 14, "name": "Thyroid gland cytology - Bethesda II: Benign — follicular nodular disease", "supercategory": "Thyroid gland"}, {"id": 15, "name": "Thyroid gland cytology - Bethesda II: Benign — follicular epithelial cells", "supercategory": "Thyroid gland"}, {"id": 16, "name": "Urine cytology - Paris II: NHGUC — negative for high-grade urothelial carcinoma", "supercategory": "Urine"}, {"id": 17, "name": "Urine cytology - Paris IV: SHGUC — suspicious for high-grade urothelial carcinoma", "supercategory": "Urine"}, {"id": 18, "name": "Urine cytology - Paris III: AUC — atypical urothelial cells", "supercategory": "Urine"}, {"id": 19, "name": "Urine cytology - Paris V: HGUC — high-grade urothelial carcinoma", "supercategory": "Urine"}, {"id": 20, "name": "TCT_CCD cytology - Bethesda NILM: negative for intraepithelial lesion or malignancy", "supercategory": "TCT_CCD"}, {"id": 21, "name": "TCT_CCD cytology - Bethesda ASC-US: atypical squamous cells, undetermined significance", "supercategory": "TCT_CCD"}, {"id": 22, "name": "TCT_CCD cytology - Bethesda ASC-H: atypical squamous cells, cannot exclude HSIL", "supercategory": "TCT_CCD"}, {"id": 23, "name": "TCT_CCD cytology - Bethesda LSIL: low-grade squamous intraepithelial lesion", "supercategory": "TCT_CCD"}, {"id": 24, "name": "TCT_CCD cytology - Bethesda HSIL/SCC: high-grade SIL or squamous carcinoma", "supercategory": "TCT_CCD"}, {"id": 25, "name": "TCT_CCD cytology - Bethesda AGC/AIS: atypical glandular cells or adenocarcinoma", "supercategory": "TCT_CCD"}, {"id": 26, "name": "TCT_CCD cytology - Bethesda NILM: Trichomonas vaginalis organism present", "supercategory": "TCT_CCD"}, {"id": 27, "name": "TCT_CCD cytology - Bethesda NILM: fungal organisms consistent with Candida", "supercategory": "TCT_CCD"}, {"id": 28, "name": "TCT_CCD cytology - Bethesda NILM: bacterial vaginosis, HSV, or Actinomyces", "supercategory": "TCT_CCD"}, {"id": 29, "name": "TCT_CCD cytology - Bethesda NILM: benign endocervical component present", "supercategory": "TCT_CCD"}]'
+  REGISTER:
+    test:
+      # Edit these paths for your host. Standard layout is
+      # DATASET/tct_ngc/{annotations,images}/.
+      ann_file: tct_ngc/annotations/test_base30.json
+      img_dir: tct_ngc/images/test
+  TEST: ("test",)
+
+INPUT:
+  MAX_SIZE_TEST: 1333
+  MIN_SIZE_TEST: 800
+
+MODEL:
+  ATSS:
+    NUM_CLASSES: 31
+  DYHEAD:
+    NUM_CLASSES: 31
+  FCOS:
+    NUM_CLASSES: 31
+  ROI_BOX_HEAD:
+    NUM_CLASSES: 31
+  LANGUAGE_BACKBONE:
+    # Default of 256 is kept on purpose — chunking covers the overflow,
+    # and pushing position embeddings beyond their pretrained range hurts
+    # zero-shot more than the extra forward passes save.
+    MAX_QUERY_LEN: 256
+
+TEST:
+  # 30 classes split into 3 chunks of <= 11 prompts each fits comfortably
+  # under MAX_QUERY_LEN with the diag_raw PSC prompts. Lower it (e.g. 8)
+  # for extra headroom if you swap to a longer description set.
+  CHUNKED_EVALUATION: 11
+  IMS_PER_BATCH: 8
