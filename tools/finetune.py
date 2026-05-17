@@ -318,6 +318,10 @@ def main():
     parser.add_argument("--keep_testing", action="store_true")
 
     args = parser.parse_args()
+    # torchrun sets LOCAL_RANK as an env var (not as a CLI flag). Without
+    # this fallback every rank stays at argparse default 0 and all 8 ranks
+    # pile their model.to() onto GPU 0, OOM-ing at startup.
+    args.local_rank = int(os.environ.get("LOCAL_RANK", args.local_rank))
 
     num_gpus = int(os.environ["WORLD_SIZE"]) if "WORLD_SIZE" in os.environ else 1
     args.distributed = num_gpus > 1
