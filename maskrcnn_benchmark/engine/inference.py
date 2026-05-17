@@ -259,7 +259,16 @@ def create_queries_and_maps(labels, label_list, additional_labels = None, cfg = 
     # tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
     if cfg.MODEL.LANGUAGE_BACKBONE.TOKENIZER_TYPE == "bert-base-uncased":
         tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
-        tokenized = tokenizer(objects_query, return_tensors="pt")
+        # Match the CLIP branch below: cap to MAX_QUERY_LEN and truncate
+        # explicitly. Without these, a concatenated long-form OVERRIDE_CATEGORY
+        # prompt (e.g. PSC/Bethesda medical names for 30 classes ≈ 500+ tokens)
+        # tokenizes past 256 silently — positive_map then references token
+        # positions that exceed logits.shape[-1] and triggers a CUDA index
+        # out-of-bounds in convert_grounding_to_od_logits.
+        tokenized = tokenizer(objects_query,
+                              max_length=cfg.MODEL.LANGUAGE_BACKBONE.MAX_QUERY_LEN,
+                              truncation=True,
+                              return_tensors="pt")
     elif cfg.MODEL.LANGUAGE_BACKBONE.TOKENIZER_TYPE == "clip":
         from transformers import CLIPTokenizerFast
         if cfg.MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS:
