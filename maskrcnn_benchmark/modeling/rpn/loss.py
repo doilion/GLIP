@@ -1189,7 +1189,11 @@ class ATSSLossComputation(torch.nn.Module):
             centerness_loss = self.centerness_loss_func(centerness_flatten, centerness_targets) / num_pos_avg_per_gpu
         else:
             reg_loss = box_regression_flatten.sum()
-            reduce_sum(centerness_flatten.new_tensor([0.0]))
+            # MUST stay a 0-dim scalar to match the if-branch's
+            # reduce_sum(centerness_targets.sum()) shape — otherwise NCCL
+            # all_reduce sees rank-divergent CollectiveFingerPrint shapes
+            # (some ranks [] vs others [1]) and crashes the run.
+            reduce_sum(centerness_flatten.new_tensor(0.0))
             centerness_loss = centerness_flatten.sum()
 
         return cls_loss, reg_loss * self.cfg.MODEL.ATSS.REG_LOSS_WEIGHT, centerness_loss, \
