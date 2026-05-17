@@ -1,0 +1,83 @@
+AUGMENT:
+  MULT_MIN_SIZE_TRAIN: (640,)
+
+DATALOADER:
+  ASPECT_RATIO_GROUPING: false
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 32
+
+DATASETS:
+  GENERAL_COPY: 1
+  TRAIN: ("train",)
+  TEST: ("val",)
+  USE_OVERRIDE_CATEGORY: True
+  USE_CAPTION_PROMPT: False
+  # Short prompts: total tokenizes to ~222 tokens (well under MAX_QUERY_LEN=256)
+  # so all 30 categories fit in the BERT prompt during training/eval. Earlier
+  # long prompts overflowed (450 tokens), causing categories 18-30 to never
+  # appear in the model's training prompt and score 0 at eval.
+  OVERRIDE_CATEGORY:
+    - {id: 1,  name: "respiratory neutrophil", supercategory: "respiratory_tract"}
+    - {id: 2,  name: "respiratory alveolar macrophage", supercategory: "respiratory_tract"}
+    - {id: 3,  name: "respiratory ciliated cell", supercategory: "respiratory_tract"}
+    - {id: 4,  name: "respiratory lymphocyte", supercategory: "respiratory_tract"}
+    - {id: 5,  name: "respiratory debris", supercategory: "respiratory_tract"}
+    - {id: 6,  name: "respiratory squamous cell", supercategory: "respiratory_tract"}
+    - {id: 7,  name: "respiratory atypical cell", supercategory: "respiratory_tract"}
+    - {id: 8,  name: "serous negative cell", supercategory: "serous_effusion"}
+    - {id: 9,  name: "serous atypical cell", supercategory: "serous_effusion"}
+    - {id: 10, name: "thyroid papillary carcinoma", supercategory: "thyroid_gland"}
+    - {id: 11, name: "thyroid suspicious papillary", supercategory: "thyroid_gland"}
+    - {id: 12, name: "thyroid benign nondiagnostic", supercategory: "thyroid_gland"}
+    - {id: 13, name: "thyroid macrophage", supercategory: "thyroid_gland"}
+    - {id: 14, name: "thyroid atypia undetermined", supercategory: "thyroid_gland"}
+    - {id: 15, name: "thyroid benign", supercategory: "thyroid_gland"}
+    - {id: 16, name: "thyroid follicular neoplasm", supercategory: "thyroid_gland"}
+    - {id: 17, name: "urine negative urothelial", supercategory: "urine"}
+    - {id: 18, name: "urine suspicious carcinoma", supercategory: "urine"}
+    - {id: 19, name: "urine atypical urothelial", supercategory: "urine"}
+    - {id: 20, name: "urine high grade carcinoma", supercategory: "urine"}
+    - {id: 21, name: "cervical normal", supercategory: "tct_ccd"}
+    - {id: 22, name: "cervical atypical squamous", supercategory: "tct_ccd"}
+    - {id: 23, name: "cervical squamous cannot exclude lesion", supercategory: "tct_ccd"}
+    - {id: 24, name: "cervical low grade lesion", supercategory: "tct_ccd"}
+    - {id: 25, name: "cervical high grade lesion", supercategory: "tct_ccd"}
+    - {id: 26, name: "cervical glandular adenocarcinoma", supercategory: "tct_ccd"}
+    - {id: 27, name: "cervical trichomonas", supercategory: "tct_ccd"}
+    - {id: 28, name: "cervical candida", supercategory: "tct_ccd"}
+    - {id: 29, name: "cervical bacterial herpes", supercategory: "tct_ccd"}
+    - {id: 30, name: "cervical endocervical cell", supercategory: "tct_ccd"}
+  REGISTER:
+    train:
+      ann_file: /root/commonfile/TCT_NGC/annotations/instances_train_dev_dev30.json
+      img_dir: /root/commonfile/TCT_NGC/images
+    val:
+      ann_file: /root/commonfile/TCT_NGC/annotations/instances_val_dev_dev30.json
+      img_dir: /root/commonfile/TCT_NGC/images
+    test_base_dev30:
+      ann_file: /root/commonfile/TCT_NGC/annotations/instances_test_base_dev30.json
+      img_dir: /root/commonfile/TCT_NGC/images
+
+INPUT:
+  MIN_SIZE_TRAIN: 640
+  MAX_SIZE_TRAIN: 640
+  MIN_SIZE_TEST: 640
+  MAX_SIZE_TEST: 640
+
+MODEL:
+  ATSS:
+    NUM_CLASSES: 31
+  DYHEAD:
+    NUM_CLASSES: 31
+  FCOS:
+    NUM_CLASSES: 31
+  ROI_BOX_HEAD:
+    NUM_CLASSES: 31
+
+SOLVER:
+  CHECKPOINT_PERIOD: 1000
+  MAX_EPOCH: 12
+  WARMUP_ITERS: 0
+
+TEST:
+  IMS_PER_BATCH: 8
