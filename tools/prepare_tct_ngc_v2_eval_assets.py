@@ -105,22 +105,40 @@ def load_train_prompt_overrides(train_yaml_path: Path):
     return {int(entry["id"]): entry for entry in oc}
 
 
+# Diagnostic-level "negative" classes excluded from the base_no_negative view.
+# These are the categories explicitly labeled as cytologically negative for
+# malignancy / disease in the original project taxonomy — i.e. they correspond
+# to "no finding" diagnoses, not just routine cell types.
+# Listing by source category name (current_name field in metadata); the dev30
+# Urine-Negative was merged into Urine-NHGUC during the dev30 projection, so
+# we match by either the merged or source name to handle both schemas.
+NEGATIVE_CLASS_NAMES = {
+    "normal",                                  # TCT_CCD-normal
+    "TCT_CCD-normal",
+    "Serous effusion-Negative samples",
+    "Thyroid gland-Negative samples",
+    "Thyroid gland-NS",                        # Bethesda II Benign, semantically negative
+    "Urine-Negative",                          # may be merged into Urine-NHGUC
+    "Urine-NHGUC",                             # the merged dev30 class
+    "respiratory tract-Negative samples",      # absent in dev30 but kept for portability
+}
+
+
 def collect_negative_ids(ann, metadata_categories_by_current_name):
-    """Return the list of GT category ids whose ontology is ``negative`` per the
-    metadata. Used downstream as the complement spec for the post-hoc
-    ``base_no_negative`` COCOeval pass.
+    """Return the list of GT category ids that are diagnostic-negative classes
+    (per ``NEGATIVE_CLASS_NAMES``). These get dropped from the
+    ``base_no_negative`` post-hoc COCOeval view so the reported AP is over
+    classes that represent actual cytologic findings (~25 classes in dev30).
     """
     negative_ids = []
     negative_names = []
     for cat in ann["categories"]:
-        meta = metadata_categories_by_current_name.get(cat["name"])
-        ontology = meta.get("ontology") if meta else None
-        if ontology == "negative":
+        if cat["name"] in NEGATIVE_CLASS_NAMES:
             negative_ids.append(cat["id"])
             negative_names.append(cat["name"])
     if not negative_ids:
         raise RuntimeError(
-            "No 'negative' ontology categories matched. Source category names: "
+            "No diagnostic-negative class names matched. Source category names: "
             f"{[c['name'] for c in ann['categories']]}"
         )
     return sorted(negative_ids), negative_names
